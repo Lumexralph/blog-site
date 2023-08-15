@@ -11,12 +11,7 @@ externalLink = ""
 series = ["Personal"]
 +++
 
-{{ $image := .Resources.GetMatch "journey-arrow.jpg" }}
-<img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="journey-image">
-
-[Alternate Text](/images/img1.jpg)
-
-<img src="https://lumexralph.github.io./images/blog/journey-arrow.jpg" alt="post-thumb" class="img-fluid rounded center mr-5 mb-4" />
+![Alternate Text](./journey-arrow.jpg)
 
 Life they say "is a journey", I am also a strong believer of that saying. I see my life as a journey and also according to one of the tech icons [Steve Jobs](https://en.wikipedia.org/wiki/Steve_Jobs) whom I learnt a lot from his story said
 
