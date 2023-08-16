@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://lumexralph.github.io/blog-site/'
 languageCode = 'en-us'
 title = 'Lumex'
 theme = 'hugo-coder'
