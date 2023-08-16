@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 date = 2020-01-22T07:15:42+01:00
 title = "Journey into Software Engineering"
 description = "Becoming a Software Engineer"
