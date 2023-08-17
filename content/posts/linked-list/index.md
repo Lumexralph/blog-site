@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 date = 2020-08-04
 title =  "Data Structures: Singly-Linked List with Go"
 description = "Review of a linked list using Go"
