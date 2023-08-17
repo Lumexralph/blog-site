@@ -1,5 +1,5 @@
 +++
-draft = true
+    draft = false
 date = 2020-02-14T07:15:42+01:00
 title =  "Building a multipurpose CLI tool with Cobra and Go"
 description = "Building a multipurpose CLI tool"

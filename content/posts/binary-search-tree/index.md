@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 date = 2020-09-20
 title =  "Data Structures: Binary Search Trees with Go"
 description = "Review of binary search trees using Go"
