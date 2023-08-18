@@ -40,3 +40,14 @@ When you can visualize, understand and know your data, it can give you more info
 see patterns that can help you make more informed decision in choosing your ML algorithm and also helps to know how to
 transform the data in a way that can be passed as features (X) and targets (y) to the as learning data for the model
 you are about to build.
+
+A lot can go wrong with our ML model if the data is not good. The source of the dataset used is from [UCI Machine Learning Repository Iris Data Set](http://archive.ics.uci.edu/dataset/53/iris).
+
+#### Brief outlook of the data
+
+After downloading the dataset, it looks like this:
+
+![data outlook](./data.png)
+
+From the data, you can see it has 4 features and a target which is the name of the flower. Also, we should visualize the
+data to have a holistic view.
