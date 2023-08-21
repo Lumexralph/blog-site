@@ -32,7 +32,11 @@ sepal length, sepal width, petal length, and petal width.
 ### Choosing Machine Learning Algorithm
 
 Looking at the problem at hand, it is a classification problem but in this case it's not a binary classification of a
-yes or no, 0 or 1, since we can identify 3 flowers, it's a multi-class classification problem.
+yes or no, 0 or 1, since we are to identify 3 flowers, it's a multi-class classification problem. The best algorithm to
+use will be Logistic Regression, is probably the single most widely used classification algorithm in the world.
+
+Just to note, Linear regression is not a good algorithm for classification problems, the algorithm is about predicting a
+number but not possible types of outcomes in this case.
 
 ### Understand your data
 
@@ -51,3 +55,5 @@ After downloading the dataset, it looks like this:
 
 From the data, you can see it has 4 features and a target which is the name of the flower. Also, we should visualize the
 data to have a holistic view.
+
+![flower species visualization](./flower-visuals.png)
