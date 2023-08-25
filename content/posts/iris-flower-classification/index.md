@@ -347,6 +347,123 @@ model.compile(
 
 history = model.fit(
     X,y,
-    epochs=50
+    epochs=30
 )
 ```
+
+```
+Epoch 1/30
+5/5 [==============================] - 1s 1ms/step - loss: 0.0591
+Epoch 2/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0457
+Epoch 3/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0476
+Epoch 4/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0485
+Epoch 5/30
+5/5 [==============================] - 0s 17ms/step - loss: 0.0466
+Epoch 6/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0468
+Epoch 7/30
+5/5 [==============================] - 0s 3ms/step - loss: 0.0461
+Epoch 8/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0462
+Epoch 9/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0467
+Epoch 10/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0466
+Epoch 11/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0462
+Epoch 12/30
+5/5 [==============================] - 0s 3ms/step - loss: 0.0469
+Epoch 13/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0467
+...
+Epoch 29/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0463
+Epoch 30/30
+5/5 [==============================] - 0s 2ms/step - loss: 0.0462
+```
+
+#### Epochs and batches
+In the `compile` statement above, the number of `epochs` was set to 30. This specifies that the entire data set should
+be applied during training 50 times.  During training, you see output describing the progress of training that looks like this:
+```
+Epoch 1/30
+5/5 [==============================] - 1s 1ms/step - loss: 0.0591
+```
+
+The first line, `Epoch 1/30`, describes which epoch the model is currently running. For efficiency, the training data
+set is broken into 'batches'. The default size of a batch in Tensorflow is 32. There are 150 examples in our data set
+or roughly 5 batches. The notation on the 2nd line `5/5 [====` is describing which batch has been executed.
+
+
+#### Loss  (cost)
+
+To track the progress of gradient descent by monitoring the cost. Ideally, the cost will decrease as the number of
+iterations of the algorithm increases. Tensorflow refers to the cost as `loss`. Above, you saw the loss displayed each
+epoch as `model.fit` was executing. The [.fit](https://www.tensorflow.org/api_docs/python/tf/keras/Model) method returns
+a variety of metrics including the loss. This is captured in the `history` variable above. This can be used to examine
+the loss in a plot as shown below.
+
+```python
+def plot_loss_tf(history):
+fig, ax = plt.subplots(1,1, figsize = (4,3))
+
+fig.canvas.toolbar_visible = False
+fig.canvas.header_visible = False
+fig.canvas.footer_visible = False
+
+ax.plot(history.history['loss'], label='loss')
+ax.set_ylim([0, 0.07])
+ax.set_xlabel('Epoch')
+ax.set_ylabel('loss (cost)')
+ax.legend()
+ax.grid(True)
+plt.show()
+
+plot_loss_tf(history)
+```
+
+![loss/cost](./loss_function.png)
+
+### Prediction
+
+Here comes the moment we've been waiting for! To identify the flower type by feeding the model one of the data we trained
+it on. To make a prediction, use Keras `predict`.
+
+```python
+# use the model to predict a Iris-virginica flower
+flower_encoding = ["Iris-setosa","Iris-versicolor", "Iris-virginica"]
+iris_virginica = X[len(X)-1]
+iris_setosa = X[0]
+print(iris_virginica)
+
+prediction = model.predict(iris_virginica.reshape(1, 4))
+print(f" predicting a 2: \n{prediction}")
+index = np.argmax(prediction)
+print(f" Largest Prediction index: {index}: {flower_encoding[index]}")
+
+prediction = model.predict(iris_setosa.reshape(1, 4))
+print(f" predicting a 0: \n{prediction}")
+index = np.argmax(prediction)
+print(f" Largest Prediction index: {index}: {flower_encoding[index]}")
+```
+
+Tadaa!
+
+```shell
+[5.9 3.  5.1 1.8]
+1/1 [==============================] - 0s 66ms/step
+predicting a 2:
+[[-57.94001    -6.19593    -2.4283934]]
+Largest Prediction index: 2: Iris-virginica
+1/1 [==============================] - 0s 24ms/step
+predicting a 0:
+[[ 27.813759   8.864102 -31.010174]]
+Largest Prediction index: 0: Iris-setosa
+```
+
+A cool way will be to put this model behind an API and a UI to display the Iris flowers depending the attribute data received.
+
+That's all folks, I definitely learnt more writing this.
