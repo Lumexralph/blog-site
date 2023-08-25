@@ -437,7 +437,6 @@ it on. To make a prediction, use Keras `predict`.
 flower_encoding = ["Iris-setosa","Iris-versicolor", "Iris-virginica"]
 iris_virginica = X[len(X)-1]
 iris_setosa = X[0]
-print(iris_virginica)
 
 prediction = model.predict(iris_virginica.reshape(1, 4))
 print(f" predicting a 2: \n{prediction}")
@@ -453,7 +452,6 @@ print(f" Largest Prediction index: {index}: {flower_encoding[index]}")
 Tadaa!
 
 ```shell
-[5.9 3.  5.1 1.8]
 1/1 [==============================] - 0s 66ms/step
 predicting a 2:
 [[-57.94001    -6.19593    -2.4283934]]
