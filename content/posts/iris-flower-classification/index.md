@@ -462,4 +462,4 @@ Largest Prediction index: 0: Iris-setosa
 
 A cool way will be to put this model behind an API and a UI to display the Iris flowers depending the attribute data received.
 
-That's all folks, I definitely learnt more writing about this.
+That's all folks, I definitely learnt more writing about this. View the complete [project](https://github.com/Lumexralph/identify-iris-flower) for reference.
