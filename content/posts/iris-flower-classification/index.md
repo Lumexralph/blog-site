@@ -1,7 +1,7 @@
 +++
 draft = true
 date = 2023-08-17
-title = "Identifying Iris flowers using multi-class classification algorithm (softmax)"
+title = "Identifying Iris flowers using multi-class classification algorithm"
 description = "using multi-class classification neural networks model to identify iris flower"
 slug = ""
 authors = ["Olumide Ogundele"]
@@ -61,7 +61,7 @@ From the visualization above, we can deduce the following:
 - Iris-setosa is the smallest in sepal-length, petal-length, and widest in sepal-width
 - Iris-virginica is the largest in sepal-length, petal-length, and  just a bit smaller in width compared to Iris-setosa
 
-More visualization using the sepal-length is done below:
+More visualization using the sepal-length is shown below:
 
 ![data outlook](./sepal_length.png)
 
@@ -128,15 +128,16 @@ all different models and choosing the right approach and machine learning algori
 tweaking those steps to the data I am dealing with to ensure a model with a high prediction rate.
 
 Since the outcome we want from the model is to decide among 3 possible outcomes, in addition to the algorithm of choice,
-there are some other algorithms like decision trees, XGBoost, that can also be used. But I am going to use an advanced learning algorithm coupled with Logistic Regression.
+there are some other algorithms like decision trees, XGBoost, that can also be used. But I am going to use an advanced
+learning algorithm coupled with Logistic Regression.
 
-We would be using Logistic Regression but not the type that determines two possible outcomes, the actual advanced
-machine learning algorithm I will use is Softmax Classification algorithm. The softmax regression algorithm is a
-generalization of logistic regression, which is a binary classification algorithm to the multiclass classification contexts.
+We would be using Logistic Regression but not the type that determines two possible outcomes. The actual advanced
+machine learning algorithm I will use is the Softmax Classification algorithm. The softmax regression algorithm is a
+generalization of logistic regression, which is a binary classification algorithm, to the multiclass classification context.
 
 Our model will be built with a neural network with softmax output with some optimization applied.
 
-Basically, if we are looking for 3 possible outcomes, we can encode the outcome using `0, 1, 2` i.e.
+Basically, if we are looking for 3 possible outcomes, we can encode the outcome using 0, 1, 2, i.e.
 
 ```python
 
@@ -147,16 +148,17 @@ flowers = {
 }
 ```
 
-We will expect our model to predict these numbers to identify the flower and that will be extracted from the encoding.
+We will expect our model to predict these numbers to identify the flower, and that will be extracted from the encoding.
 
 ## Neural Networks
 
-A multiclass neural network generates N outputs. One output is selected as the predicted answer and in our case, it will
+A multiclass neural network generates N outputs. One output is selected as the predicted answer and in this case, it will
 generate three outputs (0 - 2).
 
-### 4.2 Dataset
+### Dataset
 
 Let's start by loading the dataset for this problem.
+
 - The steps shown below loads the data into variables `X` (features) and `y` (targets)
 
 ```python
@@ -194,13 +196,12 @@ The first element of X is:  [5.1 3.5 1.4 0.2]
 The first element of y is:  0
 The last element of y is:  2
 ```
-#### 4.2.2 Check the dimensions of your variables
+#### Check the dimensions of the variables
 
-Another way to get familiar with your data is to view its dimensions. Please print the shape of `X` and `y` and see how
+Another way to get familiar with your data is to view its dimensions. Let's print the shape of `X` and `y` and see how
 many training examples you have in your dataset.
 
 ```python
-
 print ('The shape of X is: ' + str(X.shape))
 print ('The shape of y is: ' + str(y.shape))
 ```
@@ -215,30 +216,27 @@ The shape of y is: (150,)
 - The second part of the training set is a vector `y` of 150 elements that contains labels/targets for the training set
 as shown above with the flower encoding.
 
-### 4.3 Model representation
+### Model Representation
 
-The neural network you will use in this assignment is shown in the figure below.
-- This has two dense layers with ReLU activations followed by an output layer with a linear activation.
-- Recall that our inputs are pixel values of digit images.
-- Since the images are of size $20\times20$, this gives us $400$ inputs
+The neural network architecture I will use is shown in the figure below:
 
 ![model neural network](./model_NN.jpg)
 
-- The parameters have dimensions that are sized for a neural network with $25$ units in layer 1, $15$ units in layer 2 and $3$ output units in layer 3, one for each flower type encoding.
+- This has two dense layers with ReLU activations followed by an output layer with a linear activation.
+- Recall that the inputs are flower dimensions or size attributes
+- Since the size attributes are of size 4, this gives us `4` inputs
+- The parameters have dimensions that are sized for a neural network with `25` units in layer 1, `15` units in layer 2
+and `3` output units in layer 3, one for each flower type encoding (0 - 2).
 
-- Recall that the dimensions of these parameters is determined as follows:
-- If network has $s_{in}$ units in a layer and $s_{out}$ units in the next layer, then
-- $W$ will be of dimension $s_{in} \times s_{out}$.
-- $b$ will be a vector with $s_{out}$ elements
+Therefore, the shapes of `W`, and `b`,  are:
 
-- Therefore, the shapes of `W`, and `b`,  are
 - layer1: The shape of `W1` is (4, 25) and the shape of `b1` is (25,)
 - layer2: The shape of `W2` is (25, 15) and the shape of `b2` is: (15,)
 - layer3: The shape of `W3` is (15, 3) and the shape of `b3` is: (3,)
 
-### 4.4 Tensorflow Model Implementation
+### Tensorflow Model Implementation
 
-Tensorflow models are built layer by layer. A layer's input dimensions ($s_{in}$ above) are calculated for you.
+Tensorflow models are built layer by layer. A layer's input dimensions are calculated for you.
 You specify a layer's *output dimensions* and this determines the next layer's input dimension. The input dimension of
 the first layer is derived from the size of the input data specified in the `model.fit` statement below.
 
@@ -248,7 +246,7 @@ the first layer is derived from the size of the input data specified in the `mod
 tf.keras.Input(shape=(400,)),    #specify input shape
 ```
 
-### 4.5 Softmax placement
+### Softmax Placement
 
 Even though the algorithm used is a Softmax regression, there's a slight improvement and this is the reason:
 
@@ -258,11 +256,12 @@ training. This has implications when *building* the model and *using* the model.
 Building:
 * The final Dense layer should use a 'linear' activation. This is effectively no activation.
 * The `model.compile` statement will indicate this by including `from_logits=True`.
+
 ```python
 loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 ```
-* This does not impact the form of the target. In the case of SparseCategorialCrossentropy, the target is the expected
-digit, 0-2.
+* This does not impact the form of the target. In the case of `SparseCategorialCrossentropy`, the target is the expected
+value, 0 - 2.
 
 Using the model:
 * The outputs are not probabilities. If output probabilities are desired, apply a softmax function.
@@ -312,7 +311,7 @@ _________________________________________________________________
 
 The parameter counts shown in the summary correspond to the number of elements in the weight and bias arrays as shown below.
 
-Let's further examine the weights to verify that tensorflow produced the same dimensions as we calculated above.
+Let's further examine the weights to verify that Tensorflow produced the same dimensions as we calculated above.
 
 ```python
 [layer1, layer2, layer3] = model.layers
@@ -382,26 +381,28 @@ Epoch 30/30
 5/5 [==============================] - 0s 2ms/step - loss: 0.0462
 ```
 
-#### Epochs and batches
-In the `compile` statement above, the number of `epochs` was set to 30. This specifies that the entire data set should
-be applied during training 50 times.  During training, you see output describing the progress of training that looks like this:
+#### Epochs and Batches
+
+In the `compile` statement above, the number of `epochs` was set to 30. This specifies that the entire dataset should
+be applied during training 30 times.  During training, you see output describing the progress of training that looks like this:
+
 ```
 Epoch 1/30
 5/5 [==============================] - 1s 1ms/step - loss: 0.0591
 ```
 
-The first line, `Epoch 1/30`, describes which epoch the model is currently running. For efficiency, the training data
-set is broken into 'batches'. The default size of a batch in Tensorflow is 32. There are 150 examples in our data set
+The first line, `Epoch 1/30`, describes which epoch the model is currently running. For efficiency, the training dataset
+is broken into 'batches'. The default size of a batch in Tensorflow is 32. There are 150 examples in our data set
 or roughly 5 batches. The notation on the 2nd line `5/5 [====` is describing which batch has been executed.
 
 
-#### Loss  (cost)
+#### Loss (Cost)
 
 To track the progress of gradient descent by monitoring the cost. Ideally, the cost will decrease as the number of
 iterations of the algorithm increases. Tensorflow refers to the cost as `loss`. Above, you saw the loss displayed each
 epoch as `model.fit` was executing. The [.fit](https://www.tensorflow.org/api_docs/python/tf/keras/Model) method returns
 a variety of metrics including the loss. This is captured in the `history` variable above. This can be used to examine
-the loss in a plot as shown below.
+the loss in a plot as shown below:
 
 ```python
 def plot_loss_tf(history):
@@ -426,7 +427,7 @@ plot_loss_tf(history)
 
 ### Prediction
 
-Here comes the moment we've been waiting for! To identify the flower type by feeding the model one of the data we trained
+Here comes the moment we've been waiting for! To identify the flower type by feeding the model some of the data we trained
 it on. To make a prediction, use Keras `predict`.
 
 ```python
@@ -461,4 +462,4 @@ Largest Prediction index: 0: Iris-setosa
 
 A cool way will be to put this model behind an API and a UI to display the Iris flowers depending the attribute data received.
 
-That's all folks, I definitely learnt more writing this.
+That's all folks, I definitely learnt more writing about this.
