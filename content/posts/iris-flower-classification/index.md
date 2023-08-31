@@ -11,8 +11,8 @@ externalLink = ""
 series = ["classification algorithm"]
 +++
 
-I am eager to write about this because it's my first-ever Machine Learning model. After completing Machine Learning (ML)
-specialization course on Coursera by Andrew Ng, I wanted to reinforce the concepts I had learned before starting
+I am eager to write about this because it's my first Machine Learning model. After completing Machine Learning (ML)
+specialization course by Andrew Ng, I wanted to reinforce the concepts I had learned before starting
 the Deep Learning specialization. So, this will be the first project in a series of about 7 ML projects I need to do
 before I proceed with Deep Learning.
 
@@ -21,7 +21,7 @@ before I proceed with Deep Learning.
 ### Identify Irises
 
 Irises have influenced the design of the French fleur-de-lis, are commonly used in the Japanese art of flower arrangement
-known as Ikebana, and underlie the floral scents of the “essence of violet” perfume [Link]. They’re also the subject of
+known as Ikebana, and underlie the floral scents of the “essence of violet” perfume. They’re also the subject of
 this well-known machine learning project, in which you must create an ML model capable of sorting irises based on five
 factors into one of three classes: Iris Setosa, Iris Versicolour, and Iris Virginica.
 
