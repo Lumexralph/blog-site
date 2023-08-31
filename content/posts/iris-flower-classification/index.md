@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 date = 2023-08-17
 title = "Identifying Iris flowers using multi-class classification algorithm"
 description = "using multi-class classification neural networks model to identify iris flower"
